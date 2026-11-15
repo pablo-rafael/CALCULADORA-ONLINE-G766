@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Calculadora de Comissões</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Cabeçalho -->
+  <div class="page-header">
+    <div class="eyebrow">
+      <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor">
+        <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 1 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+      </svg>
+      G766 · Analítica de Negócios
+    </div>
+    <h1>Calculadora de Comissões e Bônus</h1>
+    <p>Informe os dados dos vendedores para calcular comissões mensais automaticamente.</p>
+  </div>
+
+  <!-- Passo 1: quantidade -->
+  <div class="card" id="step1">
+    <div class="card-title"><span class="step-badge">1</span> Equipe de Vendas</div>
+    <label for="qtd-input">Quantidade de vendedores</label>
+    <div style="display:flex;gap:10px;align-items:flex-start;flex-wrap:wrap;">
+      <div style="flex:1;min-width:120px;max-width:220px;">
+        <input type="number" id="qtd-input" min="1" max="50" placeholder="Ex.: 5" autocomplete="off">
+        <div class="error-msg" id="qtd-error">Informe um número entre 1 e 50.</div>
+      </div>
+      <button class="btn btn-primary" onclick="gerarFormulario()">Continuar →</button>
+    </div>
+  </div>
+
+  <!-- Passo 2: dados dos vendedores -->
+  <div class="card" id="step2" hidden>
+    <div class="card-title"><span class="step-badge">2</span> Dados dos Vendedores</div>
+    <div id="vendedores-container"></div>
+    <div class="row-actions" style="margin-top:16px;">
+      <button class="btn btn-ghost" onclick="voltarStep1()">← Alterar quantidade</button>
+      <button class="btn btn-primary" onclick="calcular()">Calcular comissões</button>
+    </div>
+  </div>
+
+  <!-- Resultados -->
+  <div class="card" id="resultados">
+    <div class="card-title"><span class="step-badge">✓</span> Resultado do Mês</div>
+
+    <div class="summary-grid" id="summary-tiles"></div>
+
+    <hr class="divider">
+
+    <div class="result-table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Vendedor</th>
+            <th>Total Vendido</th>
+            <th>%</th>
+            <th>Comissão</th>
+            <th>Bônus</th>
+            <th>A Receber</th>
+          </tr>
+        </thead>
+        <tbody id="result-body"></tbody>
+      </table>
+    </div>
+
+    <hr class="divider">
+
+    <div style="margin-bottom:12px;">
+      <div class="card-title" style="margin-bottom:12px;">Tabela de Comissões</div>
+      <div class="regras-grid">
+        <div class="regra-item">
+          <span class="regra-dot" style="background:var(--amber)"></span>
+          Até R$&nbsp;10.000 → <strong>2%</strong>
+        </div>
+        <div class="regra-item">
+          <span class="regra-dot" style="background:var(--accent)"></span>
+          R$&nbsp;10.001 – R$&nbsp;30.000 → <strong>4%</strong>
+        </div>
+        <div class="regra-item">
+          <span class="regra-dot" style="background:var(--green)"></span>
+          Acima de R$&nbsp;30.000 → <strong>6%</strong>
+        </div>
+        <div class="regra-item">
+          <span class="regra-dot" style="background:var(--green)"></span>
+          Meta ≥ R$&nbsp;20.000 → <strong>Bônus R$&nbsp;300</strong>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn btn-ghost" onclick="novoCalculo()">← Novo cálculo</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
